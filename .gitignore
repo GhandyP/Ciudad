@@ -1,0 +1,192 @@
+# Archivos de Flutter
+**/flutter_export_environment.sh
+
+# Archivos de Dart
+.dart_tool/
+.packages
+.pub/
+build/
+*.iml
+
+# Archivos de Android
+android/app/build/
+android/app/src/debug/
+android/app/src/main/obj/
+android/app/src/test/
+android/gradlew
+android/gradlew.bat
+android/local.properties
+
+# Archivos de iOS
+ios/Flutter/.last_build_id
+ios/Runner/GeneratedPluginRegistrant.h
+ios/Runner/GeneratedPluginRegistrant.m
+ios/Runner/GeneratedPluginRegistrant.swift
+ios/Flutter/App.framework
+ios/Flutter/Flutter.framework
+ios/Flutter/Flutter.podspec
+ios/Flutter/ephemeral/
+ios/Flutter/app.flx
+ios/Flutter/app.zip
+ios/Flutter/flutter_assets/
+ios/Flutter/flutter_export_environment.sh
+ios/ServiceDefinitions.json
+ios/Runner/Info.plist
+ios/Runner.xcodeproj/project.xcworkspace/xcuserdata/
+ios/Runner.xcodeproj/xcuserdata/
+
+# Archivos de macOS
+macos/Flutter/GeneratedPluginRegistrant.swift
+macos/Flutter/ephemeral/
+macos/Runner/GeneratedPluginRegistrant.swift
+
+# Archivos de Linux
+linux/flutter/generated_plugin_registrant.cc
+linux/flutter/generated_plugin_registrant.h
+linux/flutter/generated_plugins.cmake
+linux/flutter/ephemeral/
+
+# Archivos de Windows
+windows/flutter/generated_plugin_registrant.cc
+windows/flutter/generated_plugin_registrant.h
+windows/flutter/generated_plugins.cmake
+windows/flutter/ephemeral/
+
+# Archivos de Web
+lib/generated_plugin_registrant.dart
+
+# Archivos de VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Archivos de IntelliJ IDEA
+.idea/
+*.ipr
+*.iws
+*.iml
+
+# Archivos de VS Code
+.vscode/
+
+# Archivos de sistema
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Archivos de logs
+*.log
+
+# Archivos temporales
+*.tmp
+*.temp
+
+# Archivos de backup
+*.bak
+*.backup
+
+# Archivos de configuración local
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Archivos de Firebase
+firebase-debug.log
+firestore-debug.log
+
+# Archivos de análisis de código
+coverage/
+*.lcov
+
+# Archivos de testing
+test_driver/
+test/fixtures/
+
+# Archivos de documentación
+docs/_build/
+*.md.bak
+
+# Archivos de dependencias
+node_modules/
+vendor/
+
+# Archivos de cache
+.cache/
+.parcel-cache/
+.next/
+.nuxt/
+.output/
+.vercel/
+.netlify/
+
+# Archivos de base de datos local
+*.db
+*.sqlite
+*.sqlite3
+
+# Archivos de configuración de editor
+.settings/
+.project
+.classpath
+.c9/
+*.launch
+.metadata
+.recommenders
+.springBeans
+.sts4-cache
+
+# Archivos de instalación
+*.msi
+*.exe
+*.dmg
+*.pkg
+
+# Archivos de certificados
+*.p12
+*.pfx
+*.cer
+*.key
+*.pem
+
+# Archivos de configuración de red
+*.pcap
+*.har
+
+# Archivos de virtualización
+.vagrant/
+*.box
+
+# Archivos de contenedores
+.dockerignore
+Dockerfile*
+docker-compose*.yml
+
+# Archivos de CI/CD
+.github/
+.gitlab-ci.yml
+.travis.yml
+.circleci/
+.jenkins/
+
+# Archivos de paquetes
+*.tar.gz
+*.zip
+*.rar
+*.7z
+
+# Archivos de sistema operativo
+*~
+*.swp
+*.swo
+*~
+
+# Archivos específicos del proyecto
+# Agrega aquí archivos específicos que no quieras versionar

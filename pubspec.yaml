@@ -1,0 +1,53 @@
+name: petteia_flutter
+description: Un juego de Petteia (variante antigua de ajedrez) desarrollado con Flutter
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.0.0 <4.0.0'
+  flutter: ">=3.19.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # State Management
+  provider: ^6.1.1
+
+  # Persistencia local
+  shared_preferences: ^2.2.2
+
+  # Efectos de sonido
+  audioplayers: ^5.2.1
+
+  # Internacionalización
+  intl: ^0.19.0
+
+  # Análisis de código y testing
+  flutter_lints: ^3.0.1
+
+  # Testing
+  test: ^1.24.9
+  mockito: ^5.4.4
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  # Análisis estático de código
+  dart_code_metrics: ^5.7.6
+
+flutter:
+  uses-material-design: true
+
+  # Configuración para múltiples plataformas
+  assets:
+    - assets/images/
+    - assets/sounds/
+
+  # Configuración específica por plataforma
+  fonts:
+    - family: Roboto
+      fonts:
+        - asset: fonts/Roboto-Regular.ttf
+        - asset: fonts/Roboto-Bold.ttf
+          weight: 700
