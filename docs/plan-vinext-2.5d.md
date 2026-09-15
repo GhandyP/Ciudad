@@ -63,6 +63,21 @@ Las variantes históricas de Petteia pueden diferir. Antes de implementar el mot
 
 Este documento de reglas será la fuente de verdad del motor, los tests y la interfaz.
 
+### Decisiones aprobadas para el MVP
+
+- tablero de 8×8;
+- una fila completa de 8 torres blancas en el extremo inferior;
+- una fila completa de 8 torres negras en el extremo superior;
+- todas las demás casillas comienzan vacías;
+- movimiento ortogonal a cualquier distancia, sin saltar piezas;
+- captura por bloqueo entre dos torres propias;
+- dos jugadores locales en el mismo dispositivo;
+- gana el jugador que deja al rival sin torres o sin movimientos legales;
+- botón de rendición que termina la partida y concede la victoria al rival;
+- sin IA, cuentas, multiplayer online ni backend en el MVP.
+
+La captura se evaluará después de cada movimiento en las líneas ortogonales afectadas. Si una jugada produce más de una captura válida, se resolverán todas de forma determinista.
+
 ## 5. Arquitectura prevista
 
 ```text
@@ -174,7 +189,7 @@ Para cada comportamiento se seguirá este ciclo:
 2. Conectar el motor mediante `useReducer` o una abstracción equivalente.
 3. Implementar selección, movimientos posibles y confirmación de movimientos.
 4. Mostrar turno, estado, historial y capturas.
-5. Implementar reinicio y deshacer.
+5. Implementar reinicio, deshacer y rendición.
 6. Agregar navegación por teclado y etiquetas accesibles.
 
 Esta fase debe estar completa antes de introducir el renderizado 3D.
@@ -281,6 +296,7 @@ El MVP estará terminado cuando:
 - la escena 2.5D refleje siempre el estado del motor;
 - exista un modo accesible sin depender exclusivamente del Canvas;
 - la partida pueda guardarse y restaurarse localmente;
+- la rendición termine la partida y determine correctamente al ganador;
 - typecheck, lint, tests y build pasen;
 - la aplicación pueda desplegarse como preview.
 
