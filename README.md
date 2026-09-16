@@ -1,180 +1,72 @@
-# Petteia Flutter
+# Petteia web 2.5D
 
-Un juego de Petteia moderno y elegante desarrollado con Flutter para múltiples plataformas.
+Reescritura web del juego de Petteia, originalmente desarrollado en Flutter. La aplicación es un tablero 2.5D para dos jugadores locales, con motor de reglas puro y testeable.
 
-## Características
+## Stack
 
-- 🎮 **Interfaz moderna** con Material Design 3
-- 📱 **Multiplataforma** - Android, iOS, Web y Desktop
-- 💾 **Guardado automático** de partidas
-- 🔊 **Efectos de sonido** y vibración
-- 🎯 **Múltiples niveles de dificultad**
-- 📊 **Historial de movimientos**
-- 🌙 **Tema oscuro/claro** con modo sistema
-- ⚡ **Animaciones fluidas** y responsivas
+- **Vinext** — framework web (App Router sobre Vite), compatible con Next.js.
+- **React + TypeScript** — interfaz y tipado estricto.
+- **React Three Fiber + Three.js** — escena 2.5D procedural (cámara, luces, sombras, torres).
+- **Vitest** — tests unitarios del motor y la persistencia.
+- **Playwright** — tests end-to-end en navegador (Chromium).
+- **ESLint** — calidad de código.
+- **localStorage** — persistencia local versionada (schema 2) con historial de deshacer.
 
-## Tecnologías
+## Reglas del MVP
 
-- **Flutter** 3.19+ - Framework principal
-- **Dart** 3.0+ - Lenguaje de programación
-- **Provider** - State management
-- **Shared Preferences** - Persistencia local
-- **AudioPlayers** - Efectos de sonido
-- **Material Design 3** - Interfaz de usuario
+- Tablero 8×8; las blancas ocupan la fila 7 completa y las negras la fila 0 completa.
+- Movimiento ortogonal deslizante a cualquier distancia, sin saltar piezas.
+- Captura por bloqueo: tramos contiguos enemigos adyacentes a la torre movida quedan capturados cuando están cerrados por una torre propia.
+- Gana quien deja al rival sin torres o sin movimientos legales; también hay rendición.
 
-## Estructura del proyecto
+## Estructura
 
-```
-lib/
-├── main.dart                 # Punto de entrada de la aplicación
-├── models/                   # Modelos de datos
-│   ├── position.dart        # Posiciones del tablero
-│   ├── piece.dart           # Piezas de Petteia
-│   ├── move.dart            # Movimientos
-│   ├── game_state.dart      # Estado del juego
-│   └── board.dart           # Tablero de Petteia
-├── providers/               # State management
-│   └── game_provider.dart   # Provider del juego
-├── screens/                 # Pantallas principales
-│   ├── home_screen.dart     # Pantalla de inicio
-│   ├── game_screen.dart     # Pantalla del juego
-│   ├── settings_screen.dart # Configuración
-│   └── about_screen.dart    # Acerca de
-├── widgets/                 # Widgets reutilizables
-│   ├── chess_board.dart     # Tablero de Petteia
-│   ├── chess_piece.dart     # Piezas individuales
-│   ├── game_controls.dart   # Controles del juego
-│   └── game_status.dart     # Estado del juego
-└── services/                # Servicios
-    ├── game_storage.dart    # Persistencia de juegos
-    └── preferences_service.dart # Preferencias de usuario
+```text
+web/
+├── app/                    # Rutas y página del juego (Vinext App Router)
+├── src/
+│   ├── game/               # Motor puro de Petteia (sin React ni Three.js)
+│   ├── components/game/    # Componentes React (tablero HTML accesible, controles)
+│   ├── scene/              # Escena 2.5D con React Three Fiber
+│   └── services/           # Persistencia versionada en localStorage
+├── tests/unit/             # Vitest (motor y persistencia)
+├── tests/e2e/              # Playwright
+└── vite.config.ts / wrangler.jsonc  # Build y despliegue Cloudflare
 ```
 
-## Instalación
+El tablero HTML semántico queda siempre disponible como alternativa accesible a la vista 3D, incluso si WebGL no está disponible.
 
-1. **Requisitos previos:**
-   - Flutter SDK 3.19+
-   - Dart SDK 3.0+
-   - Android Studio o VS Code con Flutter extension
-
-2. **Clonar el proyecto:**
-    ```bash
-    git clone <repository-url>
-    cd petteia_flutter
-    ```
-
-3. **Instalar dependencias:**
-   ```bash
-   flutter pub get
-   ```
-
-4. **Ejecutar la aplicación:**
-   ```bash
-   # Para Android
-   flutter run
-
-   # Para iOS
-   flutter run
-
-   # Para Web
-   flutter run -d chrome
-
-   # Para Desktop (Windows/Linux/Mac)
-   flutter run -d windows
-   # flutter run -d linux
-   # flutter run -d macos
-   ```
-
-## Configuración
-
-### Plataformas soportadas
-
-El proyecto está configurado para funcionar en:
-
-- **Android** (API 21+)
-- **iOS** (iOS 11+)
-- **Web** (Chrome, Firefox, Safari, Edge)
-- **Windows** (Windows 10+)
-- **Linux** (Ubuntu 18.04+, CentOS 7+)
-- **macOS** (macOS 10.14+)
-
-### Configuración de análisis de código
-
-El proyecto incluye configuración de análisis estático:
+## Comandos
 
 ```bash
-# Ejecutar análisis
-flutter analyze
+cd web
+pnpm install
 
-# Ejecutar tests
-flutter test
-
-# Ejecutar tests con cobertura
-flutter test --coverage
+pnpm run dev             # servidor de desarrollo
+pnpm run lint            # ESLint
+pnpm run typecheck       # TypeScript estricto
+pnpm run test            # Vitest (unitarios)
+pnpm run test:e2e        # Playwright (requiere: pnpm exec playwright install chromium)
+pnpm run test:e2e:list   # listar tests E2E
+pnpm run check:vinext    # compatibilidad Vinext
+pnpm run build           # build de producción
+pnpm --dir web run deploy  # deploy a Cloudflare Workers (requiere wrangler login)
 ```
 
-## Uso
+## Despliegue
 
-### Jugabilidad básica
-
-1. **Iniciar una partida:** Presiona "Jugar" en la pantalla principal
-2. **Seleccionar pieza:** Toca una pieza para ver movimientos posibles
-3. **Mover pieza:** Toca el destino para completar el movimiento
-4. **Controles:** Usa los botones para guardar, cargar o reiniciar
-
-### Configuración
-
-Accede a la configuración desde el menú principal para:
-
-- Activar/desactivar sonido y vibración
-- Cambiar tema (claro, oscuro, sistema)
-- Ajustar nivel de dificultad
-- Configurar orientación del tablero
-- Gestionar datos guardados
-
-## Contribución
-
-1. Fork el proyecto
-2. Crea una rama para tu feature (`git checkout -b feature/nueva-funcionalidad`)
-3. Commit tus cambios (`git commit -am 'Agrega nueva funcionalidad'`)
-4. Push a la rama (`git push origin feature/nueva-funcionalidad`)
-5. Abre un Pull Request
-
-## Testing
+Vinext apunta primariamente a **Cloudflare Workers**. Configuración lista en `web/wrangler.jsonc` (worker `petteia`); autenticación previa:
 
 ```bash
-# Ejecutar todos los tests
-flutter test
-
-# Ejecutar tests específicos
-flutter test test/position_test.dart
-
-# Ejecutar tests con reporte de cobertura
-flutter test --coverage
+pnpm --dir web exec wrangler login
 ```
 
-## Licencia
+Luego:
 
-Este proyecto está bajo la Licencia MIT. Ver el archivo `LICENSE` para más detalles.
+```bash
+pnpm --dir web run deploy
+```
 
-## Soporte
+## Legado
 
-Para soporte y preguntas:
-
-- 📧 Email: support@petteiaflutter.com
-- 🐛 Reportar bugs: [Issues](https://github.com/tu-usuario/petteia-flutter/issues)
-- 📖 Documentación: [Wiki](https://github.com/tu-usuario/petteia-flutter/wiki)
-
-## Roadmap
-
-- [ ] Implementar lógica completa del Petteia
-- [ ] Agregar modo multijugador local
-- [ ] Implementar IA para jugar contra la máquina
-- [ ] Agregar más temas y personalización
-- [ ] Implementar modo de análisis de partidas
-- [ ] Agregar soporte para notación PGN
-- [ ] Implementar modo de entrenamiento/tutoría
-
----
-
-**Desarrollado con ❤️ usando Flutter**
+El código original de Flutter quedó preservado en el historial de Git como referencia; la app web no comparte código con él. Los detalles y decisiones están en [`docs/plan-vinext-2.5d.md`](docs/plan-vinext-2.5d.md) y el seguimiento de tareas en [`odd/tasks/petteia-web-25d.md`](odd/tasks/petteia-web-25d.md).
