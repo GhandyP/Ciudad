@@ -69,4 +69,4 @@ pnpm --dir web run deploy
 
 ## Legado
 
-El código original de Flutter quedó preservado en el historial de Git como referencia; la app web no comparte código con él. Los detalles y decisiones están en [`docs/plan-vinext-2.5d.md`](docs/plan-vinext-2.5d.md) y el seguimiento de tareas en [`odd/tasks/petteia-web-25d.md`](odd/tasks/petteia-web-25d.md).
+El código original de Flutter fue retirado del árbol durante la Fase 8; permanece íntegro en el historial de Git (commit inicial `9c9f6bd`) como referencia. La app web no comparte código con él. Los detalles y decisiones están en [`docs/plan-vinext-2.5d.md`](docs/plan-vinext-2.5d.md) y el seguimiento de tareas en [`odd/tasks/petteia-web-25d.md`](odd/tasks/petteia-web-25d.md).
