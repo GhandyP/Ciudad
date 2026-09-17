@@ -31,6 +31,9 @@ export default function PetteiaGame() {
     const savedStates = loadGameStates();
     if (savedStates) setStates(savedStates);
     setRestored(true);
+    // Signals to end-to-end tests (and debugging tools) that React has
+    // hydrated and interactive handlers are attached.
+    document.documentElement.dataset.petteiaReady = "true";
   }, []);
 
   const state = states[states.length - 1];
