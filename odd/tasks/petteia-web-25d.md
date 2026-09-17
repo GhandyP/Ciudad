@@ -24,7 +24,7 @@ Rehacer el proyecto Petteia desde Flutter a una aplicación web 2.5D con Vinext,
 | 4 | Construir prototipo funcional 2D accesible | done | Tablero HTML, controles, historial, rendición, undo, flechas; commit 25e93f9 |
 | 5 | Agregar escena visual 2.5D con React Three Fiber | done | Escena procedural, cámara, luces, fallback WebGL; commit 25e93f9 |
 | 6 | Integrar UX, persistencia y responsive | done | Persistencia schema 2 con stack de undo; restauración SSR-safe |
-| 7 | Verificar, optimizar y desplegar | in_progress | E2E real en Chromium pasó; adapter Cloudflare listo (225dbc4); deploy diferido al final por decisión del usuario |
+| 7 | Verificar, optimizar y desplegar | in_progress | E2E real: 8 tests pasan; adapter Cloudflare listo y build verificado (225dbc4, b153e41); deploy diferido al final por decisión del usuario |
 | 8 | Retirar Flutter y documentar arquitectura | done | README reescrito (e88af83); Flutter eliminado (df73c43); recuperable en historial (9c9f6bd) |
 
 ## Entregables verificados
@@ -32,14 +32,15 @@ Rehacer el proyecto Petteia desde Flutter a una aplicación web 2.5D con Vinext,
 - Lint: pasa.
 - Typecheck: pasa.
 - Vitest: 22 tests (3 archivos) pasan.
-- Playwright list: 1 test; E2E real en Chromium: 1 passed.
+- Playwright E2E real en Chromium: 8 tests pasan (render, selección, movimiento, undo, captura, rendición, persistencia tras recarga, teclado).
 - vinext check: 100% compatible.
-- Build: completo; warnings informativos (chunk > 500 kB, clasificación dinámica de /api/hello).
-- Commits subidos a origin/main: 334ace2, a126c25, 25e93f9, c32e95b, 9b35402, 1b4fd88, 225dbc4, 684cc1b, e88af83, df73c43 (HEAD).
+- Build Cloudflare: completo; dry-run de deploy OK; warnings informativos (chunk > 500 kB, clasificación dinámica de /api/hello).
+- Commits subidos a origin/main: 334ace2, a126c25, 25e93f9, c32e95b, 9b35402, 1b4fd88, 225dbc4, 684cc1b, e88af83, df73c43, dde4164, b153e41, 03063a8 (HEAD).
 
 ## Pendientes y obstáculos
 
 - Despliegue a Cloudflare Workers: diferido al final por decisión del usuario; requiere `wrangler login` (o `CLOUDFLARE_API_TOKEN`) y luego `pnpm --dir web run deploy`.
+- Nota de dev: el adapter de Cloudflare se aplica sólo en `build` (b153e41) porque en dev su runtime workerd no sirve HTTP en este entorno; los E2E corren contra el dev server Node con `--hostname 127.0.0.1` y timeouts amplios.
 - Cambios ajenos preservados: `.gitignore` (raíz) y `.codegraph/` — no tocar.
 - Warnings no bloqueantes: chunk grande por Three.js; ruta /api/hello no clasificada estáticamente.
 
